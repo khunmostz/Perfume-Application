@@ -8,8 +8,8 @@ class HomeController extends GetxController {
 
   int selectCategory = 0;
 
-  var minRange = 0;
-  var maxRange = 3000;
+  var minRange = 2000;
+  var maxRange = 5000;
 
   @override
   void onInit() {
@@ -30,13 +30,18 @@ class HomeController extends GetxController {
     if (conditionCheck_1 == true) {
       search.sort((b, a) => a.price.compareTo(b.price));
       update();
+    }else{
+      search.clear();
+      Product.forEach((element) => search.add(element));
+      update();
     }
     if (conditionCheck_2 == true) {
       search.sort((a, b) => a.price.compareTo(b.price));
       update();
     }
     if (conditionCheck_3 == true) {
-      search.where((element) => element.price > minRange && element.price < maxRange).toList();
+      var test = 6750;
+      search = search.where((element) => element.price >= minRange && element.price <= maxRange).toList();
       update();
     }
     update();

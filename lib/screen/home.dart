@@ -148,7 +148,6 @@ class _HomeScreenState extends State<HomeScreen>
                             duration: const Duration(milliseconds: 400),
                             child: GestureDetector(
                               onTap: () {
-                                print('test');
                                 showDialog(
                                   context: context,
                                   builder: (context) {
@@ -351,8 +350,6 @@ class _HomeScreenState extends State<HomeScreen>
                                                 _homeController.selectCategory =
                                                     index;
                                                 _homeController.onCategories();
-                                                print(_homeController
-                                                    .selectCategory);
                                               });
                                             }),
                                             child: Padding(
@@ -466,7 +463,6 @@ class _HomeScreenState extends State<HomeScreen>
                                         tween: Tween(begin: 1.0, end: 0.0),
                                         builder: (context, value, _) {
                                           var result = 100 * value;
-                                          // print(value);
                                           return Transform.translate(
                                             offset: Offset(result, 0.0),
                                             child: Padding(

@@ -274,7 +274,38 @@ class _HomeScreenState extends State<HomeScreen>
                                 ),
                               ),
                             ),
-                          )
+                          ),
+                          SlideInLeft(
+                            child: GestureDetector(
+                              onTap: () {
+                                print('add');
+                              },
+                              child: Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: Colors.purple.shade900,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 255, 162, 155)
+                                          .withOpacity(0.4),
+                                      blurRadius: 10,
+                                      spreadRadius: 10,
+                                      offset: Offset(3, 2),
+                                    )
+                                  ],
+                                ),
+                                child: Icon(
+                                  Icons.add,
+                                  size: 30,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       ZoomIn(
@@ -409,7 +440,9 @@ class _HomeScreenState extends State<HomeScreen>
                                                                 index
                                                             ? Colors.white
                                                             : Colors.black,
-                                                        fontSize: 32,
+                                                        fontSize: 24,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                     ),
                                                   ),
@@ -440,6 +473,10 @@ class _HomeScreenState extends State<HomeScreen>
                             child: GestureDetector(
                               onTap: (() {
                                 print(listSelected);
+                                Get.offNamed(
+                                  '/detail',
+                                  arguments: [],
+                                );
                               }),
                               child: GetBuilder<HomeController>(
                                   builder: (context) {

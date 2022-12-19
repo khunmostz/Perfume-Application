@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:list_animation/routes.dart';
 import 'package:list_animation/screen/home.dart';
 
 void main() {
@@ -17,9 +18,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        fontFamily: 'LabelleAurore',
+        fontFamily: 'Playfair Display',
       ),
       home: HomeScreen(),
+      getPages: Routes.routes,
+      initialRoute: Routes.initialPage,
     );
   }
 }

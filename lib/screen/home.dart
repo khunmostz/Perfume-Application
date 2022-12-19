@@ -72,8 +72,8 @@ class _HomeScreenState extends State<HomeScreen>
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Color.fromARGB(255, 217, 188, 199),
-                Color.fromARGB(255, 75, 16, 101),
+                Colors.white,
+                Color.fromARGB(255, 11, 36, 255),
               ],
             ),
           ),
@@ -86,15 +86,21 @@ class _HomeScreenState extends State<HomeScreen>
                   offset: Offset(animation.value - 1, animation.value),
                   child: BlurryContainer.square(
                     blur: 5,
-                    elevation: 1,
-                    color: Color.fromARGB(144, 120, 43, 154),
+                    elevation: 0,
+                    color: Colors.white.withOpacity(0.3),
                     child: Container(
                       width: 50,
                       height: 50,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color:
-                            Color.fromARGB(144, 120, 43, 154).withOpacity(0.3),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color.fromARGB(255, 11, 36, 255),
+                            Color.fromARGB(255, 187, 80, 230),
+                          ],
+                        ),
                       ),
                     ),
                     borderRadius: const BorderRadius.all(Radius.circular(100)),
@@ -109,15 +115,21 @@ class _HomeScreenState extends State<HomeScreen>
                   offset: Offset(animation.value - 1, animation.value - 20),
                   child: BlurryContainer.square(
                     blur: 10,
-                    elevation: 6,
-                    color: Color.fromARGB(144, 120, 43, 154),
+                    elevation: 0,
+                    color: Colors.white.withOpacity(0.3),
                     child: Container(
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color:
-                            Color.fromARGB(144, 120, 43, 154).withOpacity(0.5),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color.fromARGB(255, 11, 36, 255),
+                            Color.fromARGB(255, 187, 80, 230),
+                          ],
+                        ),
                       ),
                     ),
                     borderRadius: const BorderRadius.all(Radius.circular(100)),
@@ -253,18 +265,25 @@ class _HomeScreenState extends State<HomeScreen>
                                 width: 50,
                                 height: 50,
                                 decoration: BoxDecoration(
-                                  color: Colors.purple.shade900,
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                    colors: [
+                                      Color.fromARGB(255, 11, 36, 255),
+                                      Color.fromARGB(255, 187, 80, 230),
+                                    ],
+                                  ),
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(12),
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Color.fromARGB(255, 255, 162, 155)
-                                          .withOpacity(0.4),
-                                      blurRadius: 10,
-                                      spreadRadius: 10,
-                                      offset: Offset(3, 2),
-                                    )
+                                      color: Color.fromARGB(255, 118, 0, 253)
+                                          .withOpacity(0.3),
+                                      blurRadius: 2,
+                                      spreadRadius: 2,
+                                      offset: Offset(0, 5),
+                                    ),
                                   ],
                                 ),
                                 child: Icon(

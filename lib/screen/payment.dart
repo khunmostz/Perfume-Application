@@ -192,7 +192,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         QuickAlert.show(
                           context: context,
                           type: QuickAlertType.error,
-                          title: 'Someting has error',
+                          title: 'Someting has been error',
                           onConfirmBtnTap: () => Get.toNamed('/home'),
                         );
                       }

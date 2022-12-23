@@ -40,7 +40,10 @@ dependencies:
   blurrycontainer: ^1.0.2
   phlox_animations: ^2.1.1
   dropdown_search: ^5.0.5
-  dio: ^4.0.6
+  http: ^0.13.5
+  awesome_card: ^1.1.7
+  quickalert: ^1.0.1
+  rflutter_alert: ^2.0.4
 
 dev_dependencies:
   flutter_test:
@@ -83,8 +86,8 @@ flutter:
     - family: LabelleAurore
       fonts:
         - asset: assets/fonts/LaBelleAurore-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+    #       - asset: fonts/Schyler-Italic.ttf
+    #         style: italic
     - family: Playfair Display
       fonts:
         - asset: assets/fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf

@@ -9,6 +9,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:list_animation/controller/home.controller.dart';
+import 'package:list_animation/helper/omise.dart';
 import 'package:list_animation/models/perfume.model.dart';
 import 'package:list_animation/widget/check.dart';
 
@@ -63,19 +64,22 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    var size = Get.size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
+          height: size.height,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Colors.white,
-                Color.fromARGB(255, 11, 36, 255),
-              ],
-            ),
+            color: Colors.pink.shade100,
+            // gradient: LinearGradient(
+            //   begin: Alignment.topLeft,
+            //   end: Alignment.bottomRight,
+            //   colors: [
+            //     Color.fromARGB(255, 233, 164, 213),
+            //     Color.fromARGB(255, 240, 45, 233),
+            //   ],
+            // ),
           ),
           child: Stack(
             children: [
@@ -97,8 +101,8 @@ class _HomeScreenState extends State<HomeScreen>
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
-                            Color.fromARGB(255, 11, 36, 255),
-                            Color.fromARGB(255, 187, 80, 230),
+                            Colors.pink.shade200,
+                            Colors.pink.shade300,
                           ],
                         ),
                       ),
@@ -126,8 +130,8 @@ class _HomeScreenState extends State<HomeScreen>
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
-                            Color.fromARGB(255, 11, 36, 255),
-                            Color.fromARGB(255, 187, 80, 230),
+                            Colors.pink.shade200,
+                            Colors.pink.shade300,
                           ],
                         ),
                       ),
@@ -265,62 +269,78 @@ class _HomeScreenState extends State<HomeScreen>
                                 width: 50,
                                 height: 50,
                                 decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                    colors: [
-                                      Color.fromARGB(255, 11, 36, 255),
-                                      Color.fromARGB(255, 187, 80, 230),
-                                    ],
-                                  ),
+                                  // gradient: LinearGradient(
+                                  //   begin: Alignment.topLeft,
+                                  //   end: Alignment.bottomRight,
+                                  //   colors: [
+                                  //     Colors.white,
+                                  //     Colors.pink.shade400,
+                                  //   ],
+                                  // ),
+                                  color: Colors.white,
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(12),
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Color.fromARGB(255, 118, 0, 253)
-                                          .withOpacity(0.3),
-                                      blurRadius: 2,
+                                      color: Colors.white.withOpacity(0.3),
+                                      blurRadius: 10,
                                       spreadRadius: 2,
-                                      offset: Offset(0, 5),
+                                      offset: Offset(0, 0),
                                     ),
                                   ],
                                 ),
                                 child: Icon(
                                   Icons.arrow_drop_down,
                                   size: 30,
-                                  color: Colors.white,
+                                  color: Colors.pink,
                                 ),
                               ),
                             ),
                           ),
                           SlideInLeft(
                             child: GestureDetector(
-                              onTap: () {
-                                print('add');
+                              onTap: () async {
+                                // print('add');
+                                Omise charge = new Omise(
+                                  cardName: 'KITTABUN SUKKASEM',
+                                  cardNumber: '4242424242424242',
+                                  expMonth: '6',
+                                  expYear: '2024',
+                                  security: '123',
+                                  price: '3000',
+                                );
+                                await charge.getToken();
                               },
                               child: Container(
                                 width: 50,
                                 height: 50,
                                 decoration: BoxDecoration(
-                                  color: Colors.purple.shade900,
+                                  color: Colors.white,
+                                  // gradient: LinearGradient(
+                                  //   begin: Alignment.topLeft,
+                                  //   end: Alignment.bottomRight,
+                                  //   colors: [
+                                  //     Colors.white,
+                                  //     Colors.pink.shade400,
+                                  //   ],
+                                  // ),
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(12),
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Color.fromARGB(255, 255, 162, 155)
-                                          .withOpacity(0.4),
+                                      color: Colors.white.withOpacity(0.3),
                                       blurRadius: 10,
-                                      spreadRadius: 10,
-                                      offset: Offset(3, 2),
-                                    )
+                                      spreadRadius: 2,
+                                      offset: Offset(0, 0),
+                                    ),
                                   ],
                                 ),
                                 child: Icon(
                                   Icons.add,
                                   size: 30,
-                                  color: Colors.white,
+                                  color: Colors.pink,
                                 ),
                               ),
                             ),
@@ -417,38 +437,29 @@ class _HomeScreenState extends State<HomeScreen>
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             12.0),
-                                                    gradient: LinearGradient(
-                                                      begin: Alignment.topLeft,
-                                                      end:
-                                                          Alignment.bottomRight,
-                                                      colors: _homeController
-                                                                  .selectCategory ==
-                                                              index
-                                                          ? [
-                                                              Color.fromARGB(
-                                                                  255,
-                                                                  11,
-                                                                  36,
-                                                                  255),
-                                                              Color.fromARGB(
-                                                                  255,
-                                                                  187,
-                                                                  80,
-                                                                  230),
-                                                            ]
-                                                          : [
-                                                              Color.fromARGB(
-                                                                  255,
-                                                                  212,
-                                                                  215,
-                                                                  245),
-                                                              Color.fromARGB(
-                                                                  255,
-                                                                  102,
-                                                                  115,
-                                                                  238),
-                                                            ],
-                                                    ),
+                                                    color: _homeController
+                                                                .selectCategory ==
+                                                            index
+                                                        ? Colors.pink.shade300
+                                                        : Colors.white,
+                                                    // gradient: LinearGradient(
+                                                    //   begin: Alignment.topLeft,
+                                                    //   end:
+                                                    //       Alignment.bottomRight,
+                                                    //   colors: _homeController
+                                                    //               .selectCategory ==
+                                                    //           index
+                                                    //       ? [
+                                                    //           Colors.white,
+                                                    //           Colors.pink
+                                                    //               .shade400,
+                                                    //         ]
+                                                    //       : [
+                                                    //           Colors.pink
+                                                    //               .shade400,
+                                                    //           Colors.white,
+                                                    //         ],
+                                                    // ),
                                                   ),
                                                   child: Center(
                                                     child: Text(
@@ -492,10 +503,11 @@ class _HomeScreenState extends State<HomeScreen>
                             child: GestureDetector(
                               onTap: (() {
                                 print(listSelected);
-                                Get.offNamed(
-                                  '/detail',
-                                  arguments: [],
-                                );
+                                Get.toNamed('/detail', arguments: [
+                                  Product[listSelected],
+                                  Product[listSelected].image,
+                                  Product[listSelected].title,
+                                ]);
                               }),
                               child: GetBuilder<HomeController>(
                                   builder: (context) {
@@ -548,16 +560,9 @@ class _HomeScreenState extends State<HomeScreen>
                                                               end: Alignment
                                                                   .bottomRight,
                                                               colors: [
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    11,
-                                                                    36,
-                                                                    255),
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    187,
-                                                                    80,
-                                                                    230),
+                                                                Colors.white,
+                                                                Colors.pink
+                                                                    .shade300,
                                                               ]),
                                                           borderRadius:
                                                               BorderRadius.only(
@@ -576,18 +581,12 @@ class _HomeScreenState extends State<HomeScreen>
                                                           ),
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          118,
-                                                                          0,
-                                                                          253)
-                                                                  .withOpacity(
-                                                                      0.3),
-                                                              blurRadius: 1,
-                                                              spreadRadius: 2,
+                                                              color:
+                                                                  Colors.white,
+                                                              blurRadius: 10,
+                                                              spreadRadius: 1,
                                                               offset:
-                                                                  Offset(3, 5),
+                                                                  Offset(0, 5),
                                                             )
                                                           ],
                                                         ),
@@ -652,25 +651,9 @@ class _HomeScreenState extends State<HomeScreen>
                                                         height: 70,
                                                         decoration:
                                                             BoxDecoration(
-                                                                gradient:
-                                                                    LinearGradient(
-                                                                  begin: Alignment
-                                                                      .topLeft,
-                                                                  end: Alignment
-                                                                      .bottomRight,
-                                                                  colors: [
-                                                                    Color.fromARGB(
-                                                                        255,
-                                                                        212,
-                                                                        215,
-                                                                        245),
-                                                                    Color.fromARGB(
-                                                                        255,
-                                                                        102,
-                                                                        115,
-                                                                        238),
-                                                                  ],
-                                                                ),
+                                                                color: Colors
+                                                                    .pink
+                                                                    .shade300,
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .all(

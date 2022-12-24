@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:list_animation/controller/cart.controller.dart';
@@ -20,6 +21,7 @@ class _DetailScreenState extends State<DetailScreen> {
     var index = Get.arguments[0];
     var image = Get.arguments[1];
     var title = Get.arguments[2];
+    var price = Get.arguments[3];
     return Scaffold(
       backgroundColor: Colors.pink.shade100,
       body: SingleChildScrollView(
@@ -54,12 +56,18 @@ class _DetailScreenState extends State<DetailScreen> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () => Get.toNamed('/cart') ,
-                            child: Icon(
-                              Icons.shopping_bag_outlined,
-                              color: Colors.white,
-                            ),
-                          ),
+                              onTap: () => Get.toNamed('/cart'),
+                              child: Obx(
+                                () => Badge(
+                                  badgeContent: Text(
+                                      '${_cartController.cart.length}'),
+                                  badgeColor: Colors.white,
+                                  child: Icon(
+                                    Icons.shopping_bag_outlined,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              )),
                         ],
                       ),
                     ),
@@ -68,7 +76,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       alignment: Alignment.centerLeft,
                       child: FittedBox(
                         child: Text(
-                          'Choose your\nstyle \n${title}',
+                          'Choose\nyour\nstyle \n${title}',
                           style: TextStyle(color: Colors.white, fontSize: 48),
                         ),
                       ),
@@ -143,7 +151,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     ),
                                   ),
                                   Text(
-                                    '1000',
+                                    '${price} \$',
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 24,

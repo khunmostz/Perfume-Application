@@ -216,20 +216,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    width: size.width,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        border: Border.all(),
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(12))),
-                    child: Center(
-                      child: Text(
-                        'Back',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
+                  GestureDetector(
+                    onTap: () => Get.back(),
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      width: size.width,
+                      height: 60,
+                      decoration: BoxDecoration(
+                          border: Border.all(),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(12))),
+                      child: Center(
+                        child: Text(
+                          'Back',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     ),

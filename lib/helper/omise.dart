@@ -21,7 +21,7 @@ class Omise {
   Future<void> getToken() async {
     var url = Uri.https('vault.omise.co', '/tokens');
     var codec = latin1.fuse(base64);
-    String publicKey = 'pkey_test_5pixhwtb8kh2n8bh6qh';
+    String publicKey = ''; //publicKey
     var specialKey = codec.encode(publicKey);
     print(specialKey);
 
@@ -52,7 +52,7 @@ class Omise {
   Future<void> cardCharge() async {
     var url = Uri.https('api.omise.co', '/charges');
     var codec = latin1.fuse(base64);
-    String publicKey = 'skey_test_5pgiq9iq7yw3wquwyle';
+    String publicKey = ''; // secret key
     var specialKey = codec.encode(publicKey);
 
     try {

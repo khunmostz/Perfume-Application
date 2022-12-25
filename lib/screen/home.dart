@@ -9,6 +9,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:list_animation/controller/home.controller.dart';
+import 'package:list_animation/controller/product.controller.dart';
 import 'package:list_animation/helper/omise.dart';
 import 'package:list_animation/models/perfume.model.dart';
 import 'package:list_animation/widget/check.dart';
@@ -22,6 +23,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
+  var _productController = Get.put(ProductController());
   var _homeController = Get.put(HomeController());
 
   late AnimationController controller;
@@ -205,8 +207,8 @@ class _HomeScreenState extends State<HomeScreen>
                                                             _homeController
                                                                 .conditionCheck_1);
                                                       },
-                                                      activeColor:
-                                                          Colors.purple.shade900,
+                                                      activeColor: Colors
+                                                          .purple.shade900,
                                                       title: Text(
                                                         'Descending',
                                                         style: TextStyle(
@@ -226,8 +228,8 @@ class _HomeScreenState extends State<HomeScreen>
                                                             _homeController
                                                                 .conditionCheck_2);
                                                       },
-                                                      activeColor:
-                                                          Colors.purple.shade900,
+                                                      activeColor: Colors
+                                                          .purple.shade900,
                                                       title: Text(
                                                         'Ascending',
                                                         style: TextStyle(
@@ -247,8 +249,8 @@ class _HomeScreenState extends State<HomeScreen>
                                                             _homeController
                                                                 .conditionCheck_3);
                                                       },
-                                                      activeColor:
-                                                          Colors.purple.shade900,
+                                                      activeColor: Colors
+                                                          .purple.shade900,
                                                       title: Text(
                                                         'Range ${_homeController.minRange.toString()} - ${_homeController.maxRange.toString()} ฿',
                                                         style: TextStyle(
@@ -384,7 +386,8 @@ class _HomeScreenState extends State<HomeScreen>
                                       itemCount: categories.length,
                                       itemBuilder: (context, index) {
                                         var value = categories[index];
-                                        var delay = categories.length - index + 1;
+                                        var delay =
+                                            categories.length - index + 1;
                                         return Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 1.0),
@@ -393,9 +396,10 @@ class _HomeScreenState extends State<HomeScreen>
                                             child: GestureDetector(
                                               onTap: (() {
                                                 setState(() {
-                                                  _homeController.selectCategory =
-                                                      index;
-                                                  _homeController.onCategories();
+                                                  _homeController
+                                                      .selectCategory = index;
+                                                  _homeController
+                                                      .onCategories();
                                                 });
                                               }),
                                               child: Padding(
@@ -406,7 +410,8 @@ class _HomeScreenState extends State<HomeScreen>
                                                       milliseconds:
                                                           1000 - delay * 30),
                                                   child: Container(
-                                                    margin: EdgeInsets.all(20.0),
+                                                    margin:
+                                                        EdgeInsets.all(20.0),
                                                     width: 80,
                                                     height: 70,
                                                     decoration: BoxDecoration(
@@ -448,8 +453,8 @@ class _HomeScreenState extends State<HomeScreen>
                                 ZoomIn(
                                   child: Container(
                                     width: 2,
-                                    height:
-                                        MediaQuery.of(context).size.height * 0.7,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.7,
                                     color: Colors.white.withOpacity(0.4),
                                   ),
                                 )
@@ -462,10 +467,13 @@ class _HomeScreenState extends State<HomeScreen>
                                 onTap: (() {
                                   print(listSelected);
                                   Get.toNamed('/detail', arguments: [
-                                    Product[listSelected],
-                                    Product[listSelected].image,
-                                    Product[listSelected].title,
-                                    Product[listSelected].price,
+                                    _productController.perfume[listSelected],
+                                    _productController
+                                        .perfume[listSelected].image,
+                                    _productController
+                                        .perfume[listSelected].title,
+                                    _productController
+                                        .perfume[listSelected].price,
                                   ]);
                                 }),
                                 child: GetBuilder<HomeController>(
@@ -478,11 +486,13 @@ class _HomeScreenState extends State<HomeScreen>
                                     onSelectedItemChanged: ((value) {
                                       listSelected = value;
                                     }),
-                                    childDelegate: ListWheelChildBuilderDelegate(
+                                    childDelegate:
+                                        ListWheelChildBuilderDelegate(
                                       childCount: _homeController.search.length,
                                       builder: (context, index) {
-                                        var perfume = Product[index];
-              
+                                        var perfume =
+                                            _productController.perfume[index];
+
                                         return TweenAnimationBuilder<double>(
                                           duration:
                                               const Duration(milliseconds: 300),
@@ -509,8 +519,10 @@ class _HomeScreenState extends State<HomeScreen>
                                                         child: Container(
                                                           width: 350,
                                                           height: 300,
-                                                          margin: const EdgeInsets
-                                                              .only(bottom: 20),
+                                                          margin:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  bottom: 20),
                                                           decoration:
                                                               BoxDecoration(
                                                             gradient: LinearGradient(
@@ -524,28 +536,28 @@ class _HomeScreenState extends State<HomeScreen>
                                                                       .shade300,
                                                                 ]),
                                                             borderRadius:
-                                                                BorderRadius.only(
-                                                              topLeft:
-                                                                  Radius.circular(
+                                                                BorderRadius
+                                                                    .only(
+                                                              topLeft: Radius
+                                                                  .circular(
                                                                       300),
-                                                              topRight:
-                                                                  Radius.circular(
-                                                                      30),
+                                                              topRight: Radius
+                                                                  .circular(30),
                                                               bottomRight:
-                                                                  Radius.circular(
-                                                                      30),
-                                                              bottomLeft:
-                                                                  Radius.circular(
-                                                                      30),
+                                                                  Radius
+                                                                      .circular(
+                                                                          30),
+                                                              bottomLeft: Radius
+                                                                  .circular(30),
                                                             ),
                                                             boxShadow: [
                                                               BoxShadow(
-                                                                color:
-                                                                    Colors.white,
+                                                                color: Colors
+                                                                    .white,
                                                                 blurRadius: 2,
                                                                 spreadRadius: 1,
-                                                                offset:
-                                                                    Offset(0, 5),
+                                                                offset: Offset(
+                                                                    0, 5),
                                                               )
                                                             ],
                                                           ),
@@ -555,18 +567,20 @@ class _HomeScreenState extends State<HomeScreen>
                                                             //         .spaceBetween,
                                                             children: [
                                                               ZoomIn(
-                                                                child: Container(
+                                                                child:
+                                                                    Container(
                                                                   width: 120,
                                                                   decoration: BoxDecoration(
                                                                       // border: Border.all(
                                                                       //     color: Colors
                                                                       //         .red),
                                                                       ),
-                                                                  child: Transform
-                                                                      .scale(
-                                                                    scale: 1.2,
+                                                                  child:
+                                                                      Transform
+                                                                          .scale(
+                                                                    scale: 1.3,
                                                                     child: Image
-                                                                        .asset(
+                                                                        .network(
                                                                       '${_homeController.search[index].image}',
                                                                       fit: BoxFit
                                                                           .cover,
@@ -576,7 +590,8 @@ class _HomeScreenState extends State<HomeScreen>
                                                               ),
                                                               Transform.rotate(
                                                                 angle: pi * 1.5,
-                                                                child: Container(
+                                                                child:
+                                                                    Container(
                                                                   decoration: BoxDecoration(
                                                                       // border: Border.all(
                                                                       //     color: Colors
@@ -593,8 +608,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                                         fontSize:
                                                                             20,
                                                                         fontWeight:
-                                                                            FontWeight
-                                                                                .bold),
+                                                                            FontWeight.bold),
                                                                   ),
                                                                 ),
                                                               ),
@@ -622,18 +636,19 @@ class _HomeScreenState extends State<HomeScreen>
                                                                   ),
                                                                   boxShadow: [
                                                                 BoxShadow(
-                                                                  color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              118,
-                                                                              0,
-                                                                              253)
+                                                                  color: Color.fromARGB(
+                                                                          255,
+                                                                          118,
+                                                                          0,
+                                                                          253)
                                                                       .withOpacity(
                                                                           0.3),
                                                                   blurRadius: 2,
-                                                                  spreadRadius: 2,
-                                                                  offset: Offset(
-                                                                      3, 5),
+                                                                  spreadRadius:
+                                                                      2,
+                                                                  offset:
+                                                                      Offset(
+                                                                          3, 5),
                                                                 ),
                                                               ]),
                                                           child: Column(
@@ -654,7 +669,8 @@ class _HomeScreenState extends State<HomeScreen>
                                                                 style: TextStyle(
                                                                     color: Colors
                                                                         .white,
-                                                                    fontSize: 26,
+                                                                    fontSize:
+                                                                        26,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold),

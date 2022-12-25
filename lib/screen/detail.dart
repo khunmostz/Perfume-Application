@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:list_animation/controller/cart.controller.dart';
 import 'package:list_animation/models/perfume.model.dart';
 
@@ -59,8 +60,8 @@ class _DetailScreenState extends State<DetailScreen> {
                               onTap: () => Get.toNamed('/cart'),
                               child: Obx(
                                 () => Badge(
-                                  badgeContent: Text(
-                                      '${_cartController.cart.length}'),
+                                  badgeContent:
+                                      Text('${_cartController.cart.length}'),
                                   badgeColor: Colors.white,
                                   child: Icon(
                                     Icons.shopping_bag_outlined,
@@ -75,9 +76,11 @@ class _DetailScreenState extends State<DetailScreen> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: FittedBox(
-                        child: Text(
-                          'Choose\nyour\nstyle \n${title}',
-                          style: TextStyle(color: Colors.white, fontSize: 48),
+                        child: FadeInLeft(
+                          child: Text(
+                            'Choose\nyour\nstyle \n${title}',
+                            style: TextStyle(color: Colors.white, fontSize: 48),
+                          ),
                         ),
                       ),
                     )
@@ -113,14 +116,20 @@ class _DetailScreenState extends State<DetailScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Detail',
-                                style: TextStyle(color: Colors.white),
+                              FadeInRight(
+                                delay: Duration(milliseconds: 300),
+                                child: Text(
+                                  'Detail',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                               SizedBox(height: 10),
-                              Text(
-                                'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-                                style: TextStyle(color: Colors.white),
+                              FadeInRight(
+                                delay: Duration(milliseconds: 600),
+                                child: Text(
+                                  'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ],
                           ),
@@ -136,51 +145,57 @@ class _DetailScreenState extends State<DetailScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                              width: size.width / 4,
-                              height: 100,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Price',
-                                    style: TextStyle(
-                                      color: Colors.black45,
-                                      fontSize: 14,
+                            SlideInLeft(
+                              delay: Duration(milliseconds: 900),
+                              child: Container(
+                                width: size.width / 4,
+                                height: 100,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Price',
+                                      style: TextStyle(
+                                        color: Colors.black45,
+                                        fontSize: 14,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    '${price} \$',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 24,
+                                    Text(
+                                      '${NumberFormat.decimalPattern().format(price)} \$',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 24,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                             GestureDetector(
                               onTap: () {
                                 _cartController.addToCart(index);
                               },
-                              child: Container(
-                                width: size.width / 2,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  color: Colors.pink.shade300,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(100),
+                              child: SlideInUp(
+                                delay: Duration(milliseconds: 1100),
+                                child: Container(
+                                  width: size.width / 2,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    color: Colors.pink.shade300,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(100),
+                                    ),
                                   ),
+                                  child: Center(
+                                      child: Text(
+                                    'ADD TO CART',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                                  )),
                                 ),
-                                child: Center(
-                                    child: Text(
-                                  'ADD TO CART',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                  ),
-                                )),
                               ),
                             ),
                           ],
@@ -198,7 +213,7 @@ class _DetailScreenState extends State<DetailScreen> {
               child: ZoomIn(
                 child: Transform.scale(
                   scale: 1.6,
-                  child: Image.asset(
+                  child: Image.network(
                     image,
                   ),
                 ),

@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
+import 'package:list_animation/controller/product.controller.dart';
 import 'package:list_animation/models/perfume.model.dart';
 
 class HomeController extends GetxController {
   TextEditingController searchController = TextEditingController();
+  var _productController = Get.find<ProductController>();
   List<Perfume> search = [];
 
   int selectCategory = 0;
@@ -15,7 +17,9 @@ class HomeController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    Product.forEach((element) => search.add(element));
+    //  _productController.perfume.forEach((element) => search.add(element));
+    search = _productController.perfume;
+    print(search);
   }
 
   bool conditionCheck_1 = false;
@@ -30,9 +34,9 @@ class HomeController extends GetxController {
     if (conditionCheck_1 == true) {
       search.sort((b, a) => a.price.compareTo(b.price));
       update();
-    }else{
+    } else {
       search.clear();
-      Product.forEach((element) => search.add(element));
+      _productController.perfume.forEach((element) => search.add(element));
       update();
     }
     if (conditionCheck_2 == true) {
@@ -41,21 +45,27 @@ class HomeController extends GetxController {
     }
     if (conditionCheck_3 == true) {
       var test = 6750;
-      search = search.where((element) => element.price >= minRange && element.price <= maxRange).toList();
+      search = search
+          .where((element) =>
+              element.price >= minRange && element.price <= maxRange)
+          .toList();
       update();
     }
     update();
   }
+
   onCategories() {
     switch (selectCategory) {
       case 0:
         {
-          print('asdasddsa');
+          search = _productController.perfume;
+          print(search[0].category);
         }
         break;
       case 1:
         {
-          search = Product.where((element) =>
+          search = _productController.perfume
+              .where((element) =>
                   (element.title as String).toLowerCase().contains('gucci'))
               .toList();
           update();
@@ -63,7 +73,8 @@ class HomeController extends GetxController {
         break;
       case 2:
         {
-          search = Product.where((element) =>
+          search = _productController.perfume
+              .where((element) =>
                   (element.title as String).toLowerCase().contains('dior'))
               .toList();
           update();
@@ -71,7 +82,8 @@ class HomeController extends GetxController {
         break;
       case 3:
         {
-          search = Product.where((element) =>
+          search = _productController.perfume
+              .where((element) =>
                   (element.title as String).toLowerCase().contains('prada'))
               .toList();
           update();
@@ -79,7 +91,8 @@ class HomeController extends GetxController {
         break;
       case 4:
         {
-          search = Product.where((element) =>
+          search = _productController.perfume
+              .where((element) =>
                   (element.title as String).toLowerCase().contains('versace'))
               .toList();
           update();
@@ -87,7 +100,8 @@ class HomeController extends GetxController {
         break;
       case 5:
         {
-          search = Product.where((element) =>
+          search = _productController.perfume
+              .where((element) =>
                   (element.title as String).toLowerCase().contains('chanel'))
               .toList();
           update();
@@ -98,9 +112,11 @@ class HomeController extends GetxController {
   }
 
   onSearch(String keyword) {
-    search = Product.where((element) => (element.title as String)
-        .toLowerCase()
-        .contains(keyword.toLowerCase())).toList();
+    search = _productController.perfume
+        .where((element) => (element.title as String)
+            .toLowerCase()
+            .contains(keyword.toLowerCase()))
+        .toList();
     update();
   }
 }

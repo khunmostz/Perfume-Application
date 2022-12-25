@@ -293,36 +293,36 @@ class _HomeScreenState extends State<HomeScreen>
                                 ),
                               ),
                             ),
-                            SlideInLeft(
-                              child: GestureDetector(
-                                onTap: () async {
-                                  // print('add');
-                                },
-                                child: Container(
-                                  width: 50,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(12),
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.white.withOpacity(0.3),
-                                        blurRadius: 10,
-                                        spreadRadius: 2,
-                                        offset: Offset(0, 0),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Icon(
-                                    Icons.add,
-                                    size: 30,
-                                    color: Colors.pink,
-                                  ),
-                                ),
-                              ),
-                            ),
+                            // SlideInLeft(
+                            //   child: GestureDetector(
+                            //     onTap: () async {
+                            //       // print('add');
+                            //     },
+                            //     child: Container(
+                            //       width: 50,
+                            //       height: 50,
+                            //       decoration: BoxDecoration(
+                            //         color: Colors.white,
+                            //         borderRadius: BorderRadius.all(
+                            //           Radius.circular(12),
+                            //         ),
+                            //         boxShadow: [
+                            //           BoxShadow(
+                            //             color: Colors.white.withOpacity(0.3),
+                            //             blurRadius: 10,
+                            //             spreadRadius: 2,
+                            //             offset: Offset(0, 0),
+                            //           ),
+                            //         ],
+                            //       ),
+                            //       child: Icon(
+                            //         Icons.add,
+                            //         size: 30,
+                            //         color: Colors.pink,
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                         ZoomIn(

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:list_animation/controller/cart.controller.dart';
-import 'package:list_animation/models/perfume.model.dart';
 
 class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key});
@@ -23,6 +22,7 @@ class _DetailScreenState extends State<DetailScreen> {
     var image = Get.arguments[1];
     var title = Get.arguments[2];
     var price = Get.arguments[3];
+
     return Scaffold(
       backgroundColor: Colors.pink.shade100,
       body: SingleChildScrollView(
@@ -213,8 +213,12 @@ class _DetailScreenState extends State<DetailScreen> {
               child: ZoomIn(
                 child: Transform.scale(
                   scale: 1.6,
-                  child: Image.network(
-                    image,
+                  child: Container(
+                    width: 200,
+                    height: 200,
+                    child: Image.network(
+                      image,
+                    ),
                   ),
                 ),
               ),

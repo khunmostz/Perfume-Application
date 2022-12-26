@@ -449,15 +449,16 @@ class _HomeScreenState extends State<HomeScreen>
                               width: MediaQuery.of(context).size.width * 0.52,
                               child: GestureDetector(
                                 onTap: (() {
-                                  print(listSelected);
+                                  // print(listSelected);
+                                  // print(_homeController
+                                  //     .search[listSelected].title);
+                                  // print(_homeController
+                                  //     .search[listSelected].image);
                                   Get.toNamed('/detail', arguments: [
-                                    _productController.perfume[listSelected],
-                                    _productController
-                                        .perfume[listSelected].image,
-                                    _productController
-                                        .perfume[listSelected].title,
-                                    _productController
-                                        .perfume[listSelected].price,
+                                    _homeController.search[listSelected],
+                                    _homeController.search[listSelected].image,
+                                    _homeController.search[listSelected].title,
+                                    _homeController.search[listSelected].price,
                                   ]);
                                 }),
                                 child: GetBuilder<HomeController>(
@@ -553,7 +554,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                               ZoomIn(
                                                                 child:
                                                                     Container(
-                                                                  width: 120,
+                                                                  width: 100,
                                                                   decoration: BoxDecoration(
                                                                       // border: Border.all(
                                                                       //     color: Colors

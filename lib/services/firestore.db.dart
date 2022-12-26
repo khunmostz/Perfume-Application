@@ -9,9 +9,10 @@ class FirestoreDB {
     return _firebaseFirestore
         .collection('products')
         .orderBy('title', descending: false)
+        // .where('category', isEqualTo: 'Gucci')
         .snapshots()
         .map((snapshot) {
-      print(snapshot.docs[0]['title']);
+      // print(snapshot.docs[11]['title']);
       return snapshot.docs.map((doc) => Perfume.fromSnapshot(doc)).toList();
     });
   }

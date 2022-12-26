@@ -34,17 +34,17 @@ class HomeController extends GetxController {
     if (conditionCheck_1 == true) {
       search.sort((b, a) => a.price.compareTo(b.price));
       update();
-    } else {
-      search.clear();
-      _productController.perfume.forEach((element) => search.add(element));
-      update();
     }
+    //  else {
+    //   search.clear();
+    //   _productController.perfume.forEach((element) => search.add(element));
+    //   update();
+    // }
     if (conditionCheck_2 == true) {
       search.sort((a, b) => a.price.compareTo(b.price));
       update();
     }
     if (conditionCheck_3 == true) {
-      var test = 6750;
       search = search
           .where((element) =>
               element.price >= minRange && element.price <= maxRange)
@@ -68,6 +68,8 @@ class HomeController extends GetxController {
               .where((element) =>
                   (element.title as String).toLowerCase().contains('gucci'))
               .toList();
+
+          search.forEach(((element) => {print(element.title)}));
           update();
         }
         break;

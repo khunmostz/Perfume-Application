@@ -1,18 +1,10 @@
 import 'dart:math';
-import 'dart:ui';
-
 import 'package:animate_do/animate_do.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:list_animation/controller/home.controller.dart';
 import 'package:list_animation/controller/product.controller.dart';
-import 'package:list_animation/helper/omise.dart';
-import 'package:list_animation/models/perfume.model.dart';
-import 'package:list_animation/widget/check.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -74,14 +66,6 @@ class _HomeScreenState extends State<HomeScreen>
           height: size.height,
           decoration: BoxDecoration(
             color: Colors.pink.shade100,
-            // gradient: LinearGradient(
-            //   begin: Alignment.topLeft,
-            //   end: Alignment.bottomRight,
-            //   colors: [
-            //     Color.fromARGB(255, 233, 164, 213),
-            //     Color.fromARGB(255, 240, 45, 233),
-            //   ],
-            // ),
           ),
           child: Stack(
             children: [

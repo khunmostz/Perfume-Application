@@ -1,7 +1,4 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:list_animation/controller/cart.controller.dart';
@@ -136,7 +133,6 @@ class CartProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = Get.size;
-    var delay = index * 2;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(

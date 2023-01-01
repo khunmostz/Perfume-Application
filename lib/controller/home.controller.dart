@@ -1,10 +1,21 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:list_animation/controller/product.controller.dart';
 import 'package:list_animation/models/perfume.model.dart';
 
 class HomeController extends GetxController {
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+
   TextEditingController searchController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
+  TextEditingController categoryController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+
   var _productController = Get.find<ProductController>();
   List<Perfume> search = [];
 
@@ -27,6 +38,9 @@ class HomeController extends GetxController {
   bool conditionCheck_3 = false;
   bool conditionCheck_4 = false;
   bool conditionCheck_5 = false;
+
+  File? image;
+  String? pathImageStore;
 
   onCheck(bool value, bool check) {
     check = value;
@@ -120,5 +134,68 @@ class HomeController extends GetxController {
             .contains(keyword.toLowerCase()))
         .toList();
     update();
+  }
+
+  Future<void> chooseImage({required ImageSource imageSource}) async {
+    try {
+      final ImagePicker _picker = ImagePicker();
+      final XFile? _pickedImage = await _picker.pickImage(
+        source: imageSource,
+        imageQuality: 100,
+        maxHeight: 500,
+        maxWidth: 500,
+      );
+      if (_pickedImage != null) {
+        final Rx<File> _imagePath = File(_pickedImage.path).obs;
+        image = _imagePath.value;
+      }
+      // print(image);
+      update();
+      _uploadProduct(image!.path.toString());
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> _uploadProduct(String imagePath) async {
+    print(imagePath);
+    var firebaseRef = await FirebaseStorage.instance
+        .ref()
+        .child('product-upload/${imagePath.split('/').last}');
+    var uploadTask = firebaseRef.putFile(image!);
+    var taskSnapshot =
+        await uploadTask.whenComplete(() async {}).then((value) async {
+      print('upload profile success');
+      // Get.snackbar('แจ้งเตือน', 'เปลี่ยนรูปภาพสำเร็จ');
+      var imageUrl = await value.ref.getDownloadURL();
+      // print(imageUrl.toString());
+
+      pathImageStore = imageUrl;
+      print('url : ${pathImageStore.toString()}');
+    });
+  }
+
+  Future<void> addProduct(
+      {required String title,
+      required String category,
+      required int price,
+      required String image}) async {
+    try {
+      _firebaseFirestore.collection('products').add({
+        'title': title,
+        'category': category,
+        'price': price,
+        'image': image,
+      }).then((value) {
+        Get.snackbar('Notification 🔔', 'Upload Product Success');
+        titleController.clear();
+        categoryController.clear();
+        priceController.clear();
+        this.image == null;
+      });
+      Get.back();
+    } catch (e) {
+      print(e);
+    }
   }
 }

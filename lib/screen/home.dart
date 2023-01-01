@@ -1,8 +1,10 @@
 import 'dart:math';
 import 'package:animate_do/animate_do.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:list_animation/controller/home.controller.dart';
 import 'package:list_animation/controller/product.controller.dart';
 
@@ -23,7 +25,21 @@ class _HomeScreenState extends State<HomeScreen>
   final scrollController = ScrollController(initialScrollOffset: 50.0);
   double _currentScroll = 0.0;
 
-  List categories = ['All', 'Gucci', 'Dior', 'Prada', 'Versace', 'Chanel'];
+  List<String> categories = [
+    'All',
+    'Gucci',
+    'Dior',
+    'Prada',
+    'Versace',
+    'Chanel'
+  ];
+  List<String> categories_drop = [
+    'Gucci',
+    'Dior',
+    'Prada',
+    'Versace',
+    'Chanel'
+  ];
   int selected = 0;
   int listSelected = 0;
 
@@ -277,36 +293,38 @@ class _HomeScreenState extends State<HomeScreen>
                                 ),
                               ),
                             ),
-                            // SlideInLeft(
-                            //   child: GestureDetector(
-                            //     onTap: () async {
-                            //       // print('add');
-                            //     },
-                            //     child: Container(
-                            //       width: 50,
-                            //       height: 50,
-                            //       decoration: BoxDecoration(
-                            //         color: Colors.white,
-                            //         borderRadius: BorderRadius.all(
-                            //           Radius.circular(12),
-                            //         ),
-                            //         boxShadow: [
-                            //           BoxShadow(
-                            //             color: Colors.white.withOpacity(0.3),
-                            //             blurRadius: 10,
-                            //             spreadRadius: 2,
-                            //             offset: Offset(0, 0),
-                            //           ),
-                            //         ],
-                            //       ),
-                            //       child: Icon(
-                            //         Icons.add,
-                            //         size: 30,
-                            //         color: Colors.pink,
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
+                            SlideInLeft(
+                              child: GestureDetector(
+                                onTap: () async {
+                                  print('add');
+                                  // _homeController.chooseImage(imageSource: ImageSource.gallery);
+                                  AddDialog(context, size);
+                                },
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(12),
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.white.withOpacity(0.3),
+                                        blurRadius: 10,
+                                        spreadRadius: 2,
+                                        offset: Offset(0, 0),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Icon(
+                                    Icons.add,
+                                    size: 30,
+                                    color: Colors.pink,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                         ZoomIn(
@@ -688,6 +706,176 @@ class _HomeScreenState extends State<HomeScreen>
           ),
         ),
       ),
+    );
+  }
+
+  Future<dynamic> AddDialog(BuildContext context, Size size) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12))),
+          content: Container(
+            width: size.width,
+            height: size.height / 2,
+            color: Colors.white,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Text(
+                    'Form Add Product',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    controller: _homeController.titleController,
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      isDense: true,
+                      filled: true,
+                      fillColor: Colors.white,
+                      hintText: 'Product Name',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          borderSide: BorderSide(color: Colors.pink)),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                        borderSide: BorderSide(
+                          color: Colors.pink,
+                        ),
+                      ),
+                      focusColor: Colors.pink,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    controller: _homeController.priceController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      isDense: true,
+                      filled: true,
+                      fillColor: Colors.white,
+                      hintText: 'Price',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          borderSide: BorderSide(color: Colors.pink)),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                        borderSide: BorderSide(
+                          color: Colors.pink,
+                        ),
+                      ),
+                      focusColor: Colors.pink,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  DropdownSearch<String>(
+                    // popupProps: PopupProps.menu(
+                    //   showSelectedItems: true,
+                    //   disabledItemFn: (String s) => s.startsWith('I'),
+                    // ),
+
+                    items: categories_drop,
+                    dropdownDecoratorProps: DropDownDecoratorProps(
+                      dropdownSearchDecoration: InputDecoration(
+                        isDense: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                        ),
+                        labelText: "Category",
+                        // hintText: "country in menu mode",
+                      ),
+                    ),
+                    onChanged: (value) {
+                      _homeController.categoryController.text = value!;
+                      // print(_homeController.categoryController.text);
+                    },
+                    selectedItem: "Select Category",
+                  ),
+                  SizedBox(height: 10),
+                  GestureDetector(
+                    onTap: () => _homeController.chooseImage(
+                        imageSource: ImageSource.gallery),
+                    child: Container(
+                      width: size.width,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black26,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                      ),
+                      child: Center(
+                          child: Text(
+                        'Select Product Image',
+                        style: TextStyle(
+                          color: Colors.black54,
+                        ),
+                      )),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  GetBuilder<HomeController>(builder: (_) {
+                    return Container(
+                      width: size.width,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black26,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                      ),
+                      child: _homeController.image != null
+                          ? Image.file(_homeController.image!)
+                          : Center(
+                              child: Text(
+                              'Preview Image',
+                              style: TextStyle(
+                                color: Colors.black54,
+                              ),
+                            )),
+                    );
+                  }),
+                  SizedBox(height: 10),
+                  GestureDetector(
+                    onTap: () {
+                      _homeController.addProduct(
+                          title: _homeController.titleController.text.trim(),
+                          category:
+                              _homeController.categoryController.text.trim(),
+                          price: int.parse(
+                              _homeController.priceController.text.trim()),
+                          image: _homeController.pathImageStore!);
+                    },
+                    child: Container(
+                      width: size.width,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black26,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Confirm',
+                          style: TextStyle(
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
